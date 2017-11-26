@@ -5,24 +5,35 @@ Copyright (c) 2017 S Stewart <iamtheworst@programmer.net>
 
 Licensed under the MIT License.
 """
-import colored
+from colored import fg, bg, attr, stylize
 
 colors = {
     'debug': colored.fg(141) + colored.attr('bold'),
     'info': colored.fg(153) + colored.attr('bold'),
     'warn': colored.fg(226) + colored.attr('bold'),
     'err': colored.fg(196) + colored.attr('bold'),
-    'reset': colored.attr('reset')
 }
 
 def debug(msg):
-    print(colors['debug'] + ''.format(msg) + colors['reset'])
+    """Prints a logging message as level debug."""
+    print(stylize('[DEBUG]', colors['debug']) + msg)
 
 def info(msg):
-    print(colors['info'] + ''.format(msg) + colors['reset'])
+    """Prints a logging message as level info."""
+    print(stylize('[INFO]', colors['info']) + msg)
 
 def warn(msg):
-    print(colors['warn'] + ''.format(msg) + colors['reset'])
+    """Prints a logging message as level warn."""
+    print(stylize('[WARNING]', colors['warn']) + msg)
 
-def err(msg):
-    print(colors['err'] + ''.format(msg) + colors['reset'])
+def error(msg):
+    """Prints a logging message as level err."""
+    print(stylize('[ERROR]', colors['err']) + msg)
+
+def custom(msg, level, color):
+    """Prints a logging message at a custom level.
+    Arguments:
+    - msg: Message to log.
+    - level: Level to log as.
+    - color: what color to use for the level thing"""
+    print(stylize('[{}]'.format(level), colored.fg(color) + colored.attr('bold')) + msg)
